@@ -17,12 +17,6 @@ export interface jobGetAllProps {
 export const jobGetAll = createAsyncThunk(
   "jobs/get/pageable",
   async (input: jobGetAllProps) => {
-    // const config = {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: `Bearer ${input.token}`,
-    //   },
-    // };
     const response = await api
       .get(`/api/jobs/get?page=${input.page}&size=${input.size}`)
       .then((users: AxiosResponse) => {
@@ -76,16 +70,9 @@ export interface jobFindBySearchTitleProps {
 export const jobFindBySearchTitle = createAsyncThunk(
   "jobs/get/search",
   async (input: jobFindBySearchTitleProps) => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${input.token}`,
-      },
-    };
     const response = await api
       .get(
-        `/api/jobs/get/search?title=${input.title}&page=${input.page}&size=${input.size}`,
-        config
+        `/api/jobs/get/search?title=${input.title}&page=${input.page}&size=${input.size}`
       )
       .then((users: AxiosResponse) => {
         return users.data;
@@ -97,7 +84,7 @@ export const jobFindBySearchTitle = createAsyncThunk(
   }
 );
 
-export interface jobFindByResponsible {
+export interface jobFindByResponsibleProps {
   token: string | undefined;
   email: string | undefined;
   page: number;
@@ -106,7 +93,7 @@ export interface jobFindByResponsible {
 
 export const jobFindByResponsible = createAsyncThunk(
   "jobs/get/responsible",
-  async (input: jobFindByResponsible) => {
+  async (input: jobFindByResponsibleProps) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -192,22 +179,6 @@ export const jobPostAddTalent = createAsyncThunk(
     return response;
   }
 );
-
-interface userDeleteProps {
-  id: number;
-  token: string;
-}
-
-// export const userDelete = createAsyncThunk(
-//   "user/delete",
-//   async (dado: userDeleteProps) => {
-//     const response = await api
-//       .post(`/user/delete/${dado.id}`)
-//       .then((user: AxiosResponse) => user.data)
-//       .catch((erro: AxiosResponse) => erro);
-//     return response;
-//   }
-// );
 
 export const jobLogout = createAsyncThunk("company/logout", async () => {
   const response = console.log("Logout success.");

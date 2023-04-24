@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Button, TextField } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +15,6 @@ interface ConsultaAlunosProps {
 export const ConsultaAlunos = (props: ConsultaAlunosProps) => {
   const { parceiro } = props;
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
   const [uid, setUid] = useState<string>("");
   const [dadosProfissional, setDadosProfissional] = useState<boolean>(true);

@@ -2,7 +2,6 @@ import React, {
   Dispatch,
   SetStateAction,
   useEffect,
-  useRef,
   useState,
 } from "react";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -10,8 +9,6 @@ import {
   Autocomplete,
   Button,
   FormControl,
-  FormGroup,
-  FormLabel,
   InputLabel,
   MenuItem,
   Modal,
@@ -21,7 +18,6 @@ import {
 // import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw } from "draft-js";
-import { draftToMarkdown } from "markdown-draft-js";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import {
   KeywordDTO,
@@ -55,16 +51,16 @@ export const ModalAddVaga = ({
   const [editorState, setEditorState] = useState<EditorState | undefined>();
   const [content, setContent] = useState<any>();
 
-  const [id, setId] = useState<number>(0);
-  const [error, setError] = useState<boolean>(false);
-  const [message, setMessage] = useState<string>("");
-  const [edition, setEdition] = useState<boolean>();
+  // const [id, setId] = useState<number>(0);
+  // const [error, setError] = useState<boolean>(false);
+  // const [message, setMessage] = useState<string>("");
+  // const [edition, setEdition] = useState<boolean>();
 
   const [name, setName] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
 
   const [title, setTitle] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
+  // const [description, setDescription] = useState<string>("");
 
   const [differentials, setDifferentials] = useState<string>("");
   const [seniority, setSeniority] = useState<string>("");
@@ -89,7 +85,7 @@ export const ModalAddVaga = ({
       const dateToday = Date().split(" ");
       setExpectedStartDate(dateToday[3] + "-02-" + dateToday[2]);
     }
-  }, []);
+  }, [dispatch, userLogin]);
 
   const handleSubmit = async () => {
     if (isEdit) {
@@ -128,8 +124,8 @@ export const ModalAddVaga = ({
       if (job.payload.name === "AxiosError") {
         // const message = job.payload.message.split(" ");
         // setMessage(message[5]);
-        const message = job.payload.response.data.message;
-        setMessage(message);
+        // const message = job.payload.response.data.message;
+        // setMessage(message);
       } else {
         if (handleClose) {
           // handleClose();
@@ -138,7 +134,7 @@ export const ModalAddVaga = ({
     }
   };
 
-  const handleAddEvent = async () => {
+  // const handleAddEvent = async () => {
     // setError("");
     // const agendamento = await dispatch(
     // agendamentoPost({
@@ -154,11 +150,11 @@ export const ModalAddVaga = ({
     //   handleClose();
     // }
     // }
-  };
+  // };
 
-  const handleUpdateEvent = async () => {
+  // const handleUpdateEvent = async () => {
     // setError("");
-  };
+  // };
 
   const listKeyword = useAppSelector(selectAllKeyword);
   const listCompany = useAppSelector(selectAllCompany);

@@ -1,16 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { Button, Pagination, PaginationItem, TextField } from "@mui/material";
-import { CardVaga } from "../../../components/card/CardVaga";
 import { SideBar } from "../../../components/sidebar/SideBar";
-import { SideBarAluno } from "../../../components/sidebar/SideBarAluno";
-import { Link, useNavigate } from "react-router-dom";
-import { SideBarParceiro } from "../../../components/sidebar/SideBarParceiro";
+import { Link } from "react-router-dom";
 import { ModalParceiros } from "./ModalParceiros";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import {
-  companyGetAll,
-  companyGetAllPaged,
-} from "../../../store/modules/company/CompanySlice";
+import { companyGetAllPaged } from "../../../store/modules/company/CompanySlice";
 import { userGetAllPartners } from "../../../store/modules/user/UserSlice";
 import { TopBar } from "../../../components/topBar/TopBar";
 import { IoIosBusiness } from "react-icons/io";
@@ -21,8 +16,8 @@ interface DetalhesVagaProps {
 }
 
 export const Parceiros = (props: DetalhesVagaProps) => {
-  const { inscrever, parceiro } = props;
-  const navigate = useNavigate();
+  // const { inscrever, parceiro } = props;
+  // const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -31,7 +26,7 @@ export const Parceiros = (props: DetalhesVagaProps) => {
 
   const [currentPage2, setCurrentPage2] = useState<number>(1);
   const [totalPages2, setTotalPages2] = useState<number>(1);
-  const [totalElements2, setTotalElements2] = useState<number>(1);
+  // const [totalElements2, setTotalElements2] = useState<number>(1);
 
   const [parceiros, setParceiros] = useState<boolean>(true);
   const [empresasParceiras, setEmpresasParceiras] = useState<boolean>(false);
@@ -133,7 +128,9 @@ export const Parceiros = (props: DetalhesVagaProps) => {
                   <div className="flex justify-center text-[36px] mr-[5px]">
                     <IoIosBusiness />
                   </div>
-                  <div className="text-[24px] lg:text-[28px] font-bold">Parceiros</div>
+                  <div className="text-[24px] lg:text-[28px] font-bold">
+                    Parceiros
+                  </div>
                 </div>
               </div>
               <div className="ml-[3vw] md:ml-[15vw]">

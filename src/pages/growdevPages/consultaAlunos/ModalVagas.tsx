@@ -1,14 +1,9 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import {
-  Button,
-  FormControl,
-  InputLabel,
   Modal,
   TextField,
 } from "@mui/material";
 // import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { CardVaga } from "../../../components/card/CardVaga";
 import { ModalDetalhe } from "./ModalDetalhe";
 
 interface IModalInfosEventCalendaryProps {
@@ -26,24 +21,24 @@ export const ModalVagas = ({
   setRender,
   render,
 }: IModalInfosEventCalendaryProps) => {
-  const [id, setId] = useState<number>(0);
-  const [error, setError] = useState<string>("");
+  // const [id, setId] = useState<number>(0);
+  // const [error, setError] = useState<string>("");
   const [modalTwo, setModalTwo] = useState<boolean>(false);
   const [edition, setEdition] = useState<boolean>();
   // const dispatch = useAppDispatch();
 
-  const openModal = () => {
-    setModalTwo(true);
-  };
+  // const openModal = () => {
+    // setModalTwo(true);
+  // };
 
   const closeModal = () => {
     setModalTwo(false);
-    // handleClose();
+    handleClose && handleClose();
     setEdition(false);
   };
 
-  const handleAddEvent = async () => {
-    setError("");
+  // const handleAddEvent = async () => {
+    // setError("");
     // const agendamento = await dispatch(
     // agendamentoPost({
     // })
@@ -58,13 +53,13 @@ export const ModalVagas = ({
     //   handleClose();
     // }
     // }
-  };
+  // };
 
-  const handleUpdateEvent = async () => {
-    setError("");
-  };
+  // const handleUpdateEvent = async () => {
+    // setError("");
+  // };
 
-  const handleDeleteEvent = async () => {};
+  // const handleDeleteEvent = async () => {};
 
   return (
     <>
@@ -94,9 +89,9 @@ export const ModalVagas = ({
             </div>
           </div>
           <div className="overflow-y-scroll">
-            <div className="h-[505px] bg-slate-50">
-              <CardVaga modal openModal={openModal} />
-            </div>
+            {/* <div className="h-[505px] bg-slate-50">
+              <CardVaga modal openModal={openModal} uid={} />
+            </div> */}
           </div>
         </div>
       </Modal>

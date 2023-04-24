@@ -1,21 +1,18 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import {
-  Avatar,
   Box,
   Button,
-  Checkbox,
-  FormControlLabel,
   Grid,
   Link,
   Paper,
   TextField,
-  Typography,
 } from "@mui/material";
 import { userLogin } from "../../store/modules/userLogin/UserLoginSlice";
 import { userCreate } from "../../store/modules/user/UserSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { CreateUserDTO, Login } from "../../types/User";
+import { Login } from "../../types/User";
 
 interface modeProp {
   mode: string;
@@ -40,7 +37,7 @@ const SignInSignUp = ({ mode }: modeProp) => {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
 
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  // const [showPassword, setShowPassword] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [response, setResponse] = useState<string>("");
   const [previousNavigation, setPreviousNavigation] = useState<string>();
@@ -57,13 +54,13 @@ const SignInSignUp = ({ mode }: modeProp) => {
     }
     if (user[0]) {
       if (user[0].token) {
-        if (user[0].userDTO.roleName == "CANDIDATO") {
+        if (user[0].userDTO.roleName === "CANDIDATO") {
           setError(false);
           navigate("/");
-        } else if (user[0].userDTO.roleName == "PARCEIRO") {
+        } else if (user[0].userDTO.roleName === "PARCEIRO") {
           setError(false);
           navigate("/empresa-parceira");
-        } else if (user[0].userDTO.roleName == "GROWDEV") {
+        } else if (user[0].userDTO.roleName === "GROWDEV") {
           setError(false);
           navigate("/growdever");
         }
@@ -86,13 +83,13 @@ const SignInSignUp = ({ mode }: modeProp) => {
         setError(false);
         navigate(`${previousNavigation}`);
       } else {
-        if (usuarioLogado.payload.userDTO.roleName == "CANDIDATO") {
+        if (usuarioLogado.payload.userDTO.roleName === "CANDIDATO") {
           setError(false);
           navigate("/");
-        } else if (usuarioLogado.payload.userDTO.roleName == "PARCEIRO") {
+        } else if (usuarioLogado.payload.userDTO.roleName === "PARCEIRO") {
           setError(false);
           navigate("/empresa-parceira");
-        } else if (usuarioLogado.payload.userDTO.roleName == "GROWDEV") {
+        } else if (usuarioLogado.payload.userDTO.roleName === "GROWDEV") {
           setError(false);
           navigate("/growdever");
         }
@@ -174,7 +171,7 @@ const SignInSignUp = ({ mode }: modeProp) => {
           elevation={6}
           square
         >
-          {mode == "signin" && (
+          {mode === "signin" && (
             <Box
               sx={{
                 mx: 6,
@@ -187,6 +184,7 @@ const SignInSignUp = ({ mode }: modeProp) => {
                 <img
                   className="w-[170px] h-[150px]"
                   src={require("../../assets/growdev.png")}
+                  alt="growdev"
                 />
               </Box>
               <div className="text-[22px] font-bold text-blue-900 mb-[20px]">
@@ -243,7 +241,7 @@ const SignInSignUp = ({ mode }: modeProp) => {
               </Box>
             </Box>
           )}
-          {mode == "signup" && (
+          {mode === "signup" && (
             <Box
               sx={{
                 // my: 8,
@@ -258,6 +256,7 @@ const SignInSignUp = ({ mode }: modeProp) => {
                 <img
                   className="w-[150px] h-[130px]"
                   src={require("../../assets/growdev.png")}
+                  alt="growdev"
                 />
               </Box>
               <div className="text-[22px] font-bold text-blue-900 mb-[20px]">

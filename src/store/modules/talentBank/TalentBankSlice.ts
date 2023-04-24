@@ -166,22 +166,6 @@ export const talentBankPost = createAsyncThunk(
   }
 );
 
-interface userDeleteProps {
-  id: number;
-  token: string;
-}
-
-// export const userDelete = createAsyncThunk(
-//   "user/delete",
-//   async (dado: userDeleteProps) => {
-//     const response = await api
-//       .post(`/user/delete/${dado.id}`)
-//       .then((user: AxiosResponse) => user.data)
-//       .catch((erro: AxiosResponse) => erro);
-//     return response;
-//   }
-// );
-
 export const talentBankLogout = createAsyncThunk(
   "talentBank/logout",
   async () => {
@@ -213,7 +197,7 @@ const TalentBankSlice = createSlice({
     });
     builder.addCase(talentBankFindByEmail.fulfilled, (state, action) => {
       if (action.payload.uid) {
-        if (state.ids.length == 0) {
+        if (state.ids.length === 0) {
           adapter.addOne(state, action.payload); // post, create + addOne na store
         } else {
           adapter.removeAll(state);

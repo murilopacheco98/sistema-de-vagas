@@ -1,25 +1,21 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
-  Autocomplete,
   Button,
   FormControl,
   InputLabel,
   Modal,
-  OutlinedInput,
   TextField,
 } from "@mui/material";
 // import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { CardVaga } from "../../../components/card/CardVaga";
+import { MenuItem, Select } from "@mui/material";
 import {
   companyCreate,
   companyGetAll,
   selectAll,
 } from "../../../store/modules/company/CompanySlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { CompanyDTO } from "../../../types/Company";
 import { userCreate } from "../../../store/modules/user/UserSlice";
-import { userLogin } from "../../../store/modules/userLogin/UserLoginSlice";
 
 interface IModalInfosEventCalendaryProps {
   open: boolean;
@@ -39,8 +35,8 @@ export const ModalParceiros = ({
   render,
 }: IModalInfosEventCalendaryProps) => {
   const dispatch = useAppDispatch();
-  const [dadosAluno, setDadosAluno] = useState<boolean>(true);
-  const [curriculo, setCurriculo] = useState<boolean>(false);
+  // const [dadosAluno, setDadosAluno] = useState<boolean>(true);
+  // const [curriculo, setCurriculo] = useState<boolean>(false);
   const [error, setError] = useState<boolean>();
   const [response, setResponse] = useState<string>("");
 

@@ -70,22 +70,6 @@ export const keywordPost = createAsyncThunk(
   }
 );
 
-interface userDeleteProps {
-  id: number;
-  token: string;
-}
-
-// export const userDelete = createAsyncThunk(
-//   "user/delete",
-//   async (dado: userDeleteProps) => {
-//     const response = await api
-//       .post(`/user/delete/${dado.id}`)
-//       .then((user: AxiosResponse) => user.data)
-//       .catch((erro: AxiosResponse) => erro);
-//     return response;
-//   }
-// );
-
 export const keywordLogout = createAsyncThunk("company/logout", async () => {
   const response = console.log("Logout success.");
   return response;

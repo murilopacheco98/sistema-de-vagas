@@ -35,7 +35,7 @@ const UserLoginSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(userLogin.fulfilled, (state, action) => {
       if (action.payload.userDTO) {
-        if (state.ids.length == 0) {
+        if (state.ids.length === 0) {
           adapter.addOne(state, action.payload); // post, create + addOne na store
         } else {
           adapter.removeAll(state);

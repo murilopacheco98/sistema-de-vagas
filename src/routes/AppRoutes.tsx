@@ -23,7 +23,10 @@ export const AppRoutes = () => {
           <Route path="/login" element={<SignInSignUp mode="signin" />} />
           <Route path="/cadastrar" element={<SignInSignUp mode="signup" />} />
           <Route path="/growdever" element={<GrowdeverPrincipal />} />
-          <Route path="/growdever/consulta-vaga/:uid" element={<ConsultaVaga growdever />} />
+          <Route
+            path="/growdever/consulta-vaga/:uid"
+            element={<ConsultaVaga growdever />}
+          />
           <Route
             path="/growdever/banco-de-talentos"
             element={<BancoTalentos />}
@@ -37,11 +40,11 @@ export const AppRoutes = () => {
             element={<UpdateAluno />}
           />
           <Route path="/growdever/parceiros" element={<Parceiros />} />
-          <Route path="/" element={<AlunoHome />} />
-          <Route path="/vagas-abertas" element={<VagasAbertas />} />
+          <Route path="/meu-perfil" element={<AlunoHome />} />
+          <Route path="/" element={<VagasAbertas />} />
           <Route
             path="/vagas-abertas/informacoes-da-vaga/:uid"
-            element={<DetalhesVaga inscrever />}
+            element={<DetalhesVaga />}
           />
           <Route path="/vagas-inscritas" element={<VagasInscritas />} />
           <Route

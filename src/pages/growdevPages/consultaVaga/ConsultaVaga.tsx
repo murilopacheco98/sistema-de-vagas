@@ -1,4 +1,5 @@
-import { Button, InputAdornment, TextField } from "@mui/material";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Button, TextField } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { SideBar } from "../../../components/sidebar/SideBar";
@@ -7,7 +8,6 @@ import { SideBarParceiro } from "../../../components/sidebar/SideBarParceiro";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { selectById } from "../../../store/modules/job/JobSlice";
 import { talentBankGetByJobUid } from "../../../store/modules/talentBank/TalentBankSlice";
-import ReactMarkdown from "react-markdown";
 
 interface ConsultaVagaProps {
   parceiro?: boolean;
@@ -26,7 +26,6 @@ export const ConsultaVaga = (props: ConsultaVagaProps) => {
 
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
   const [diferenciais, setDiferenciais] = useState<string>("");
   const [workFormat, setWorkFormat] = useState<string>("");
   const [startDate, setStartDate] = useState<string>("");
@@ -61,7 +60,6 @@ export const ConsultaVaga = (props: ConsultaVagaProps) => {
       setName(jobByUid?.dataProfileDTO.name);
       setEmail(jobByUid?.dataProfileDTO.email);
       setDiferenciais(jobByUid?.differentials);
-      setDescription(jobByUid?.description);
       setWorkFormat(jobByUid?.workFormat);
       setCity(jobByUid?.cityName);
       setStartDate(jobByUid?.expectedStartDate);
@@ -291,7 +289,7 @@ export const ConsultaVaga = (props: ConsultaVagaProps) => {
                       />
                     </div>
                     <div className="w-[100%] mb-[30px]">
-                      <TextField
+                      {/* <TextField
                         multiline
                         fullWidth
                         label="Descrição da vaga"
@@ -311,7 +309,7 @@ export const ConsultaVaga = (props: ConsultaVagaProps) => {
                             color: "#000000",
                           },
                         }}
-                      />
+                      /> */}
                     </div>
                     <div className="w-[100%] mb-[30px]">
                       <TextField

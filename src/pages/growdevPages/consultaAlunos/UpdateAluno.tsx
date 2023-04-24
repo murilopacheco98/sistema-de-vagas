@@ -11,9 +11,9 @@ export const UpdateAluno = () => {
   const [modalOne, setModalOne] = useState<boolean>(false);
   const [edicao, setEdicao] = useState<boolean>(false);
 
-  const openModal = () => {
-    setModalOne(true);
-  };
+  // const openModal = () => {
+  //   setModalOne(true);
+  // };
 
   const closeModal = () => {
     setModalOne(false);

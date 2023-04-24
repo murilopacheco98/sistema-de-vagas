@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
   Autocomplete,
@@ -5,11 +6,10 @@ import {
   FormControl,
   InputLabel,
   Modal,
-  OutlinedInput,
   TextField,
 } from "@mui/material";
 // import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { MenuItem, Select } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import {
   KeywordDTO,
@@ -17,7 +17,6 @@ import {
   selectAll,
 } from "../../../store/modules/keyword/KeywordSlice";
 import { talentBankPost } from "../../../store/modules/talentBank/TalentBankSlice";
-import { userLogin } from "../../../store/modules/userLogin/UserLoginSlice";
 
 interface IModalInfosEventCalendaryProps {
   open: boolean;
@@ -39,12 +38,12 @@ export const ModalCadastrar = ({
   const [dadosAluno, setDadosAluno] = useState<boolean>(true);
   const [curriculo, setCurriculo] = useState<boolean>(false);
 
-  const [id, setId] = useState<number>(0);
+  // const [id, setId] = useState<number>(0);
   const [error, setError] = useState<boolean>(false);
   const [response, setResponse] = useState<string>("");
-  const [edition, setEdition] = useState<boolean>();
+  // const [edition, setEdition] = useState<boolean>();
   const dispatch = useAppDispatch();
-  const [edicao, setEdicao] = useState<boolean>(false);
+  // const [edicao, setEdicao] = useState<boolean>(false);
 
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -313,7 +312,7 @@ export const ModalCadastrar = ({
                         label="PCD"
                         value={pcd}
                         onChange={(e) =>
-                          setPcd(e.target.value == "true" ? true : false)
+                          setPcd(e.target.value === "true" ? true : false)
                         }
                       >
                         <MenuItem value="true">Sim</MenuItem>
@@ -333,7 +332,7 @@ export const ModalCadastrar = ({
                         label="Aluno Growdev"
                         value={growdev}
                         onChange={(e) =>
-                          setGrowdev(e.target.value == "true" ? true : false)
+                          setGrowdev(e.target.value === "true" ? true : false)
                         }
                       >
                         <MenuItem value="true">Sim</MenuItem>

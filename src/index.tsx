@@ -1,10 +1,6 @@
-import { createTheme, ThemeProvider } from "@mui/material";
 import React from "react";
-import ReactDOM from "react-dom/client";
 import App from "./App";
 import { render } from "react-dom";  
-
-const theme = createTheme();
 
 render(
   <React.StrictMode>

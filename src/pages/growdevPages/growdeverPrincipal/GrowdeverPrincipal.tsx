@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { Button, Pagination, PaginationItem, TextField } from "@mui/material";
 import { CardVaga } from "../../../components/card/CardVaga";
@@ -8,7 +9,6 @@ import {
   jobFindBySearchTitle,
   jobGetAll,
 } from "../../../store/modules/job/JobSlice";
-import { JobDTO } from "../../../types/Job";
 import { TopBar } from "../../../components/topBar/TopBar";
 import { ModalAddVaga } from "./ModalAddVaga";
 import { TbReportSearch } from "react-icons/tb";
@@ -29,8 +29,6 @@ export const GrowdeverPrincipal = () => {
   const [workFormat, setWorkFormat] = useState<string>("");
   const [city, setCity] = useState<string>("");
   const [maxSalary, setMaxSalary] = useState<string>("");
-  const [seniority, setSeniority] = useState<string>("");
-  const [keywords, setKeywords] = useState<string>("");
   const [modal, setModal] = useState<boolean>(false);
   const [edicao, setEdicao] = useState<boolean>(false);
 
@@ -49,7 +47,7 @@ export const GrowdeverPrincipal = () => {
   useEffect(() => {
     if (userLogin[0]) {
       if (userLogin[0].token) {
-        if (userLogin[0].userDTO.roleName != "GROWDEV") {
+        if (userLogin[0].userDTO.roleName !== "GROWDEV") {
           navigate("/login");
         }
       }
@@ -116,149 +114,92 @@ export const GrowdeverPrincipal = () => {
         xl:ml-[87px] mt-[170px] h-[790px] bg-slate-100 absolute"
       />
       <ModalAddVaga open={modal} handleClose={closeModal} isEdit={edicao} />
-      {filterOn ? (
-        <div className="flex brightness-50" onClick={() => setFilterOn(false)}>
-          <SideBar filter={filterOn} vagasAbertas />
-          <div className="w-[92.9vw]">
-            <TopBar />
-            <div className="h-[100px] w-[100%] justify-around bg-gray-900 text-white flex items-center">
-              <div className="md:flex items-center">
-                <div className="flex justify-center text-[30px] md:text-[40px] lg:text-[50px]">
-                  <TbReportSearch />
-                </div>
-                <div className="font-bold text-[20px] ml-[10px]">
-                  Vagas Abertas
-                </div>
+      <div className={filterOn ? "flex brightness-50" : "flex"}>
+        <SideBar filter={filterOn} vagasAbertas />
+        <div className="w-[94.1vw]">
+          <TopBar />
+          <div className="h-[100px] w-[100%] justify-around bg-gray-900 text-white flex items-center">
+            <div className="md:flex items-center">
+              <div className="flex justify-center text-[30px] md:text-[40px] lg:text-[50px]">
+                <TbReportSearch />
               </div>
-              <div className="hidden sm:flex">
-                <TextField
-                  color="info"
-                  placeholder="Pesquisar vaga"
-                  onChange={(e) => setInputValue(e.target.value)}
-                  value={inputValue}
-                  className="bg-white rounded-2xl font-bold w-[20vw] sm:w-[30vw] lg:w-[25vw]"
-                />
+              <div className="font-bold text-[18px] ml-[10px]">
+                Vagas Abertas
               </div>
-              <Button variant="contained" color="warning">
-                <div className="normal-case">Filtrar</div>
-              </Button>
             </div>
-            {listJobs[0] !== undefined ? (
-              <div className="flex flex-wrap bg-slate-100">
-                {listJobs.map((job) => (
-                  <div key={job?.uid} className="h-[540px] pl-[26px]">
-                    <CardVaga
-                      growdev
-                      title={job?.title}
-                      description={job?.description}
-                      status={job?.status}
-                      workFormat={job?.workFormat}
-                      seniority={job?.seniority}
-                      name={job?.dataProfileDTO.name}
-                      budget={job?.budget}
-                      numberSubscribes={job?.numberParticipants}
-                      uid={job?.uid}
-                    />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div>Nenhuma vaga foi encontrada.</div>
-            )}
-          </div>
-        </div>
-      ) : (
-        <div className="flex">
-          <SideBar filter={filterOn} vagasAbertas />
-          <div className="w-[94.1vw]">
-            <TopBar />
-            <div className="h-[100px] w-[100%] justify-around bg-gray-900 text-white flex items-center">
-              <div className="md:flex items-center">
-                <div className="flex justify-center text-[30px] md:text-[40px] lg:text-[50px]">
-                  <TbReportSearch />
-                </div>
-                <div className="font-bold text-[18px] ml-[10px]">
-                  Vagas Abertas
-                </div>
-              </div>
-              <div className="hidden sm:flex">
-                <TextField
-                  color="info"
-                  placeholder="Pesquisar vaga"
-                  onChange={(e) => setInputValue(e.target.value)}
-                  value={inputValue}
-                  className="bg-white rounded-2xl font-bold w-[20vw] sm:w-[30vw] lg:w-[25vw]"
-                />
-              </div>
-              <div className="flex-block items-center md:flex pl-[20px]">
-                <div className="mb-[10px] md:mb-[0px]">
-                  <Button
-                    variant="contained"
-                    color="warning"
-                    onClick={openModal}
-                    sx={{ mr: "15px" }}
-                  >
-                    <div className="normal-case">Adicionar vaga</div>
-                  </Button>
-                </div>
+            <div className="hidden sm:flex">
+              <TextField
+                color="info"
+                placeholder="Pesquisar vaga"
+                onChange={(e) => setInputValue(e.target.value)}
+                value={inputValue}
+                className="bg-white rounded-2xl font-bold w-[20vw] sm:w-[30vw] lg:w-[25vw]"
+              />
+            </div>
+            <div className="flex-block items-center md:flex pl-[20px]">
+              <div className="mb-[10px] md:mb-[0px]">
                 <Button
                   variant="contained"
                   color="warning"
-                  onClick={() => setFilterOn(true)}
+                  onClick={openModal}
+                  sx={{ mr: "15px" }}
                 >
-                  <div className="normal-case">Filtrar</div>
+                  <div className="normal-case">Adicionar vaga</div>
                 </Button>
               </div>
-            </div>
-            <div className="bg-slate-200 absolute">
-              {listJobs[0] !== undefined ? (
-                <div className="flex flex-wrap justify-center relative ml-[-20px]">
-                  {listJobs.map((job) => (
-                    <div key={job?.uid} className="h-[240px] pl-[0px]">
-                      <CardVaga
-                        growdev
-                        title={job?.title}
-                        description={job?.description}
-                        status={job?.status}
-                        workFormat={job?.workFormat}
-                        seniority={job?.seniority}
-                        name={
-                          job?.dataProfileDTO ? job.dataProfileDTO.name : ""
-                        }
-                        budget={job?.budget}
-                        numberSubscribes={job?.numberParticipants}
-                        uid={job?.uid}
-                      />
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-[20px] mt-[3vh] ml-[6vw]">
-                  Nenhuma vaga foi encontrada.
-                </div>
-              )}
-              {listJobs[0] !== undefined && (
-                <div className="flex justify-center mb-[30px] mt-[20px]">
-                  <Pagination
-                    onChange={handleChangePage}
-                    page={currentPage}
-                    count={totalPages}
-                    size="large"
-                    variant="outlined"
-                    renderItem={(item) => (
-                      <PaginationItem
-                        component={Link}
-                        to={`/growdever`}
-                        {...item}
-                      />
-                    )}
-                  />
-                </div>
-              )}
+              <Button
+                variant="contained"
+                color="warning"
+                onClick={() => setFilterOn(true)}
+              >
+                <div className="normal-case">Filtrar</div>
+              </Button>
             </div>
           </div>
+          <div className="bg-slate-200 absolute">
+            {listJobs[0] !== undefined ? (
+              <div className="flex flex-wrap justify-center relative ml-[-20px]">
+                {listJobs.map(
+                  (job) =>
+                    job && (
+                      <div key={job?.uid} className="h-[240px] pl-[0px]">
+                        <CardVaga
+                          growdev
+                          uid={job?.uid}
+                          modal={modal}
+                          openModal={openModal}
+                        />
+                      </div>
+                    )
+                )}
+              </div>
+            ) : (
+              <div className="text-[20px] mt-[3vh] ml-[6vw]">
+                Nenhuma vaga foi encontrada.
+              </div>
+            )}
+            {listJobs[0] !== undefined && (
+              <div className="flex justify-center mb-[30px] mt-[20px]">
+                <Pagination
+                  onChange={handleChangePage}
+                  page={currentPage}
+                  count={totalPages}
+                  size="large"
+                  variant="outlined"
+                  renderItem={(item) => (
+                    <PaginationItem
+                      component={Link}
+                      to={`/growdever`}
+                      {...item}
+                    />
+                  )}
+                />
+              </div>
+            )}
+          </div>
         </div>
-      )}
+      </div>
+      {/* )} */}
       {filterOn && (
         <div className="w-[368px] h-[100vh] right-0 top-0 absolute z-10 bg-white">
           <div className="text-orange-500 text-[25px] justify-end flex mr-[25px] mt-[15px]">

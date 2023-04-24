@@ -1,14 +1,10 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import {
   Button,
-  FormControl,
-  InputLabel,
   Modal,
   TextField,
 } from "@mui/material";
 // import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { CardVaga } from "../../../components/card/CardVaga";
 
 interface IModalInfosEventCalendaryProps {
   open: boolean;
@@ -23,26 +19,26 @@ export const ModalDetalhe = ({
   setRender,
   render,
 }: IModalInfosEventCalendaryProps) => {
-  const [id, setId] = useState<number>(0);
-  const [error, setError] = useState<string>("");
-  const [modalTwo, setModalTwo] = useState<boolean>(false);
-  const [edition, setEdition] = useState<boolean>();
+  // const [id, setId] = useState<number>(0);
+  // const [error, setError] = useState<string>("");
+  // const [modalTwo, setModalTwo] = useState<boolean>(false);
+  // const [edition, setEdition] = useState<boolean>();
   const [tituloVaga, setTituloVaga] = useState<boolean>(true);
   const [pessoasInscritas, setPessoasInscritas] = useState<boolean>(false);
   // const dispatch = useAppDispatch();
 
-  const openModal = () => {
-    setModalTwo(true);
-  };
+  // const openModal = () => {
+    // setModalTwo(true);
+  // };
 
-  const closeModal = () => {
-    setModalTwo(false);
-    // handleClose;
-    setEdition(false);
-  };
+  // const closeModal = () => {
+  //   setModalTwo(false);
+  //   handleClose;
+  //   setEdition(false);
+  // };
 
-  const handleAddEvent = async () => {
-    setError("");
+  // const handleAddEvent = async () => {
+    // setError("");
     // const agendamento = await dispatch(
     // agendamentoPost({
     // })
@@ -57,13 +53,13 @@ export const ModalDetalhe = ({
     //   handleClose();
     // }
     // }
-  };
+  // };
 
-  const handleUpdateEvent = async () => {
-    setError("");
-  };
+  // const handleUpdateEvent = async () => {
+  //   setError("");
+  // };
 
-  const handleDeleteEvent = async () => {};
+  // const handleDeleteEvent = async () => {};
 
   return (
     <Modal

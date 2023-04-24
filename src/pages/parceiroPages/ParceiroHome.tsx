@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { Button, Pagination, PaginationItem, TextField } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
@@ -14,17 +15,15 @@ export const ParceiroHome = () => {
   const [filterOn, setFilterOn] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
-  const [totalElements, setTotalElements] = useState<number>(1);
+  // const [totalElements, setTotalElements] = useState<number>(1);
 
   const [vaga, setVaga] = useState<string>("");
   const [empresa, setEmpresa] = useState<string>("");
   const [workFormat, setWorkFormat] = useState<string>("");
   const [city, setCity] = useState<string>("");
   const [maxSalary, setMaxSalary] = useState<string>("");
-  const [seniority, setSeniority] = useState<string>("");
-  const [keywords, setKeywords] = useState<string>("");
-  const [modal, setModal] = useState<boolean>(false);
   const [edicao, setEdicao] = useState<boolean>(false);
+  const [modal, setModal] = useState<boolean>(false);
 
   const openModal = () => {
     setModal(true);

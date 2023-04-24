@@ -6,7 +6,7 @@ import {
 import { api } from "../../../service/api/api";
 import { RootState } from "../../index";
 import { AxiosResponse } from "axios";
-import { CreateUserDTO, Login, UserDTO } from "../../../types/User";
+import { CreateUserDTO, UserDTO } from "../../../types/User";
 
 export interface userGetAllProps {
   token: string;
