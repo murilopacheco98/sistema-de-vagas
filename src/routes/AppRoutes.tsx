@@ -1,10 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import CssBaseline from "@mui/material/CssBaseline";
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React, { useEffect } from "react";
+import {
+  BrowserRouter,
+  Outlet,
+  Route,
+  RouteObject,
+  RouteProps,
+  RouterProviderProps,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import { GrowdeverPrincipal } from "../pages/growdevPages/growdeverPrincipal/GrowdeverPrincipal";
 import { ConsultaVaga } from "../pages/growdevPages/consultaVaga/ConsultaVaga";
 import { ConsultaAlunos } from "../pages/growdevPages/consultaAlunos/ConsultaAlunos";
-import SignInSignUp from "../pages/signIn-signUp/SignInSignUp";
 import { BancoTalentos } from "../pages/growdevPages/bancoTalentos/BancoTalentos";
 import { UpdateAluno } from "../pages/growdevPages/consultaAlunos/UpdateAluno";
 import { AlunoHome } from "../pages/alunoPages/alunoHome/AlunoHome";
@@ -13,6 +22,24 @@ import { DetalhesVaga } from "../pages/alunoPages/detalhesVaga/DetalhesVaga";
 import { VagasInscritas } from "../pages/alunoPages/vagasInscritas/VagasInscritas";
 import { ParceiroHome } from "../pages/parceiroPages/ParceiroHome";
 import { Parceiros } from "../pages/growdevPages/parceiros/Parceiros";
+import { SignUp } from "../pages/signIn-signUp/SignUp";
+import { SignUpSucess } from "../pages/signIn-signUp/SignUpSucess";
+import { EmailResetPassword } from "../pages/signIn-signUp/EmailResetPassword";
+import { ResetPassword } from "../pages/signIn-signUp/ResetPassword";
+import { SignIn } from "../pages/signIn-signUp/SignIn";
+import { useAppSelector } from "../store/hooks";
+
+const ProtectedAdmin = () => {
+  const navigate = useNavigate();
+  const user = Object.values(
+    useAppSelector((store) => store.userLogin.entities)
+  );
+  if (user[0]?.userDTO.roleName !== "GROWDEV") {
+    navigate("/");
+  }
+
+  return <Outlet />;
+};
 
 export const AppRoutes = () => {
   return (
@@ -20,28 +47,17 @@ export const AppRoutes = () => {
       <BrowserRouter>
         <CssBaseline />
         <Routes>
-          <Route path="/login" element={<SignInSignUp mode="signin" />} />
-          <Route path="/cadastrar" element={<SignInSignUp mode="signup" />} />
-          <Route path="/growdever" element={<GrowdeverPrincipal />} />
+          <Route path="/login" element={<SignIn />} />
+          <Route path="/cadastro" element={<SignUp />} />
+          <Route path="/cadastro/sucesso" element={<SignUpSucess />} />
           <Route
-            path="/growdever/consulta-vaga/:uid"
-            element={<ConsultaVaga growdever />}
+            path="/e-mail/reset-password"
+            element={<EmailResetPassword />}
           />
-          <Route
-            path="/growdever/banco-de-talentos"
-            element={<BancoTalentos />}
-          />
-          <Route
-            path="/growdever/consulta-alunos"
-            element={<ConsultaAlunos />}
-          />
-          <Route
-            path="/growdever/consulta-alunos/editar"
-            element={<UpdateAluno />}
-          />
-          <Route path="/growdever/parceiros" element={<Parceiros />} />
-          <Route path="/meu-perfil" element={<AlunoHome />} />
+          <Route path="/reset-password/:id" element={<ResetPassword />} />
+
           <Route path="/" element={<VagasAbertas />} />
+          <Route path="/meu-perfil" element={<AlunoHome />} />
           <Route
             path="/vagas-abertas/informacoes-da-vaga/:uid"
             element={<DetalhesVaga />}
@@ -51,11 +67,29 @@ export const AppRoutes = () => {
             path="/vagas-inscritas/informacoes-da-vaga"
             element={<DetalhesVaga />}
           />
+          
+          <Route element={<ProtectedAdmin />}>
+            <Route path="/growdever" element={<GrowdeverPrincipal />} />
+            <Route
+              path="/growdever/consulta-vaga/:uid"
+              element={<ConsultaVaga growdever />}
+            />
+            <Route
+              path="/growdever/banco-de-talentos"
+              element={<BancoTalentos />}
+            />
+            <Route
+              path="/growdever/consulta-alunos"
+              element={<ConsultaAlunos />}
+            />
+            <Route
+              path="/growdever/consulta-alunos/editar"
+              element={<UpdateAluno />}
+            />
+            <Route path="/growdever/parceiros" element={<Parceiros />} />
+          </Route>
+
           <Route path="/empresa-parceira" element={<ParceiroHome />} />
-          {/* <Route
-            path="/empresa-parceira/informacoes-da-vaga"
-            element={<ConsultaVaga parceiro />}
-          /> */}
           <Route
             path="/empresa-parceira/informacoes-da-vaga/:uid"
             element={<ConsultaVaga parceiro />}
@@ -72,6 +106,7 @@ export const AppRoutes = () => {
             path="/empresa-parceira/vagas-abertas/informacoes-da-vaga/:uid"
             element={<DetalhesVaga parceiro />}
           />
+
         </Routes>
       </BrowserRouter>
     </>

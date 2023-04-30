@@ -23,6 +23,7 @@ export const BancoTalentos = () => {
   const [filterOn, setFilterOn] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
   const [render, setRender] = useState<boolean>(false);
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
 
   const [city, setCity] = useState<string>("");
   const [modal, setModal] = useState<boolean>(false);
@@ -117,16 +118,17 @@ export const BancoTalentos = () => {
         setRender={setRender}
         render={render}
       />
-      <div
-        className="w-[calc(100%-77px)] ml-[77px] sm:w-[calc(100%-85px)]
-        sm:ml-[85px] lg:w-[calc(100%-84px)] lg:ml-[84px] xl:w-[calc(100%-87px)]
-        xl:ml-[87px] mt-[170px] h-[790px] bg-slate-100 absolute"
-      />
       <div>
-        <div className={`flex ${bgFilter}`}>
-          <SideBar filter={filterOn} bancoTalentos />
-          <div className="w-[92.9vw] relative">
-            <TopBar />
+        <div
+          className={`flex ${bgFilter}`}
+          onClick={() => {
+            filterOn && setFilterOn(false);
+            openMenu && setOpenMenu(false);
+          }}
+        >
+          <SideBar filter={filterOn} bancoTalentos openMenu={openMenu} />
+          <div className="w-[100%] relative">
+            <TopBar setOpenMenu={setOpenMenu} />
             <div className="h-[100px] w-[100%] justify-around bg-gray-900 text-white flex items-center">
               <div className="lg:flex items-center">
                 <div>
@@ -170,19 +172,19 @@ export const BancoTalentos = () => {
                 </Button>
               </div>
             </div>
-            <div className="bg-slate-100 w-[81vw] sm:w-[85vw] md:w-[88vw] lg:w-[91vw] xl:w-[92.8vw] pt-[30px] pb-[46px]">
-              <div className="mx-[3vw] min-h-[670px] bg-white border-[3px] rounded-2xl">
+            <div className="bg-slate-100 w-[100%] pt-[30px] pb-[46px]">
+              <div className="w-[100%] md:w-[90%] md:ml-[5%] lg:w-[80%] lg:ml-[10%] min-h-[670px] bg-white border-[3px] rounded-2xl">
                 <div>
                   <div className="overflow-scroll ">
-                    <div className="w-[1210px] pl-[9vw] flex text-[12px] h-[40px] border-b-[2px] mt-[30px]">
+                    <div className="min-w-[1000px] pl-[3vw] lg:pl-[9vw] flex text-[12px] h-[40px] border-b-[2px] mt-[30px]">
                       <div className="w-[200px] text-start font-bold">Nome</div>
                       <div className="w-[200px] text-start font-bold">
                         Contatos
                       </div>
-                      <div className="w-[200px] text-start font-bold">
+                      <div className="w-[150px] text-start font-bold">
                         Cidade
                       </div>
-                      <div className="w-[200px] text-start font-bold">
+                      <div className="w-[150px] text-start font-bold">
                         Status
                       </div>
                       <div className="w-[200px] text-start font-bold">
@@ -194,7 +196,7 @@ export const BancoTalentos = () => {
                         <div
                           key={talentBank?.uid}
                           onClick={() => navigate("/growdever/consulta-alunos")}
-                          className="cursor-pointer flex w-[1210px] pl-[9vw] items-center h-[60px] text-[12px] border-b-[2px]"
+                          className="cursor-pointer flex min-w-[1000px] pl-[3vw] lg:pl-[9vw] items-center h-[60px] text-[12px] border-b-[2px]"
                         >
                           <div className="w-[200px] text-start">
                             {talentBank?.name}
@@ -225,10 +227,10 @@ export const BancoTalentos = () => {
                               Email
                             </div>
                           </div>
-                          <div className="w-[200px] text-start">
+                          <div className="w-[150px] text-start">
                             {talentBank?.addressDTO.stateName}
                           </div>
-                          <div className="w-[200px] flex justify-start">
+                          <div className="w-[150px] flex justify-start">
                             <div className="text-white font-bold px-[15px] py-[5px] items-center flex justify-center bg-blue-400 rounded-2xl">
                               {talentBank?.status}
                             </div>

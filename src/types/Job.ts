@@ -4,6 +4,7 @@ export interface JobDTO {
   uid: string;
   title: string;
   description: string;
+  shortDescription: string;
   mainRequirements: string;
   differentials: string;
   seniority: string;
@@ -21,12 +22,10 @@ export interface JobDTO {
 
 export interface JobFilter {
   title: string;
-  companyName: string;
   workFormat: string;
-  cityName: string;
-  maxSalary: string;
+  stateName: string;
+  minSalary: number;
   seniority: string;
-  keywordName: string[]
 }
 
 export interface JobTalent {

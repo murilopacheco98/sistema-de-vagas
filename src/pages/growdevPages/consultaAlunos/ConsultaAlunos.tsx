@@ -69,13 +69,10 @@ export const ConsultaAlunos = (props: ConsultaAlunosProps) => {
         open={modalOne}
         handleClose={closeModal}
         isEdit={edicao}
-        // user={user[0]}
-        // currentPage={currentPage}
-        // size={size}
       />
       <div className="flex">
         {parceiro ? <SideBarParceiro minhasVagas /> : <SideBar bancoTalentos />}
-        <div className="w-[93.2vw] bg-[#E5E5E5] h-[960px]">
+        <div className="w-[100%] bg-[#E5E5E5] min-h-[960px]">
           <div className="h-[70px] w-[100%] bg-blue-900 justify-end flex items-center">
             <div className="mr-[55px] text-[25px] text-white">icon usuário</div>
           </div>
@@ -332,6 +329,7 @@ export const ConsultaAlunos = (props: ConsultaAlunosProps) => {
                     </div>
                     <div className="w-[200px] text-start font-bold">Cidade</div>
                   </div>
+                  
                   <div className="flex w-[1200px] pl-[3vw] items-center h-[70px] text-[12px] border-b-[2px]">
                     <div className="w-[200px] text-start">Nome da vaga</div>
                     <div className="w-[200px] flex justify-start">

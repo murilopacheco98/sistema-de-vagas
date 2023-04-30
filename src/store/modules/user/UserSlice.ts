@@ -70,16 +70,59 @@ export const userCreate = createAsyncThunk(
   }
 );
 
-// export const userDelete = createAsyncThunk(
-//   "user/delete",
-//   async (dado: userDeleteProps) => {
-//     const response = await api
-//       .post(`/user/delete/${dado.id}`)
-//       .then((user: AxiosResponse) => user.data)
-//       .catch((erro: AxiosResponse) => erro);
-//     return response;
-//   }
-// );
+export const confirmEmail = createAsyncThunk(
+  "user/confirm-email",
+  async (checkerCode: string) => {
+    const response = await api
+      .post(`/user/confirm-email/${checkerCode}`)
+      .then((users: AxiosResponse) => users.data)
+      .catch((erro: AxiosResponse) => erro);
+    return response;
+  }
+);
+
+interface ResendConfirmEmailProps {
+  email: string;
+}
+
+export const resendConfirmEmail = createAsyncThunk(
+  "user/resend/confirm-email",
+  async (input: ResendConfirmEmailProps) => {
+    const { email } = input;
+    const response = await api
+      .get(`/user/resend/confirm-email/${email}`)
+      .then((users: AxiosResponse) => users.data)
+      .catch((erro: AxiosResponse) => erro);
+    return response;
+  }
+);
+
+interface ResetPasswordProps {
+  resetPasswordToken: string;
+  newPassword: string;
+}
+
+export const resetPassword = createAsyncThunk(
+  "user/reset-password",
+  async (input: ResetPasswordProps) => {
+    const response = await api
+      .post("/user/reset-password", input)
+      .then((users: AxiosResponse) => users.data)
+      .catch((erro: AxiosResponse) => erro);
+    return response;
+  }
+);
+
+export const sendEmailResetPassword = createAsyncThunk(
+  "user/email/reset-password",
+  async (email: string) => {
+    const response = await api
+      .get(`/user/email/reset-password/${email}`)
+      .then((users: AxiosResponse) => users.data)
+      .catch((erro: AxiosResponse) => erro);
+    return response;
+  }
+);
 
 export const userLogout = createAsyncThunk("user/logout", async () => {
   const response = console.log("Logout success.");

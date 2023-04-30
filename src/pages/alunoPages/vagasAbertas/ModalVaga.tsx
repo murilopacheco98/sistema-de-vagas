@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import { Button, TextField, Modal } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import {
@@ -8,6 +8,10 @@ import {
 } from "../../../store/modules/job/JobSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ContentState, EditorState } from "draft-js";
+import { Editor } from "react-draft-wysiwyg";
+import htmlToDraft from "html-to-draftjs";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 interface IModalInfosEventCalendaryProps {
   open: boolean;
@@ -22,10 +26,35 @@ export const ModalVaga = ({
 }: IModalInfosEventCalendaryProps) => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(false);
+  const [editorState, setEditorState] = useState<EditorState>(
+    EditorState.createEmpty()
+  );
 
   const job = useAppSelector((state) => selectById(state, id));
-  const userLogin = Object.values(useAppSelector((state) => state.userLogin.entities));
-  const talentBank = Object.values(useAppSelector((state) => state.talentBank.entities));
+  const userLogin = Object.values(
+    useAppSelector((state) => state.userLogin.entities)
+  );
+  const talentBank = Object.values(
+    useAppSelector((state) => state.talentBank.entities)
+  );
+
+  useEffect(() => {
+    if (job?.description) {
+      setEditorState(
+        EditorState.createWithContent(
+          ContentState.createFromBlockArray(
+            htmlToDraft(job.description).contentBlocks
+          )
+        )
+      );
+    } else {
+      setEditorState(
+        EditorState.createWithContent(
+          ContentState.createFromBlockArray(htmlToDraft("").contentBlocks)
+        )
+      );
+    }
+  }, [id]);
 
   const AddTalent = async () => {
     setLoading(true);
@@ -41,9 +70,9 @@ export const ModalVaga = ({
           })
         );
         if (success.payload.name === "AxiosError") {
-          toast.error(success.payload.response.data.message)
+          toast.error(success.payload.response.data.message);
         } else {
-          toast.success("Usuário candidatado com sucesso.")
+          toast.success("Usuário candidatado com sucesso.");
         }
       } else {
         toast.error("Cadastre seu perfil para se candidatar");
@@ -146,10 +175,16 @@ export const ModalVaga = ({
             <div className="mb-[10px] text-[18px] text-[#5B5B5B]">
               Descrição
             </div>
-            <div
-              className="min-h-[50px] flex flex-col justify-center border-[1.5px] border-zinc-300 px-[15px] pt-[5px] pb-[5px] rounded-md mb-[20px] text-[14px] max-h-[500px] overflow-y-scroll"
-              dangerouslySetInnerHTML={{ __html: job ? job?.description : "" }}
-            />
+            <div className="border-[1px] px-[15px] border-[#c1c0c0] rounded-md w-[100%] mr-[20px] md:mr-[26px] mb-[20px]">
+              <Editor
+                toolbarHidden
+                readOnly
+                wrapperClassName="wrapper-class"
+                editorClassName="editor-class"
+                toolbarClassName="toolbar-class"
+                editorState={editorState}
+              />
+            </div>
             <div className=" w-[100%] mr-[15px] md:mr-[26px] mb-[20px]">
               <TextField
                 disabled

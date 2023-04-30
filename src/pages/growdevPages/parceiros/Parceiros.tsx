@@ -23,7 +23,7 @@ export const Parceiros = (props: DetalhesVagaProps) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [totalElements, setTotalElements] = useState<number>(1);
-
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [currentPage2, setCurrentPage2] = useState<number>(1);
   const [totalPages2, setTotalPages2] = useState<number>(1);
   // const [totalElements2, setTotalElements2] = useState<number>(1);
@@ -115,44 +115,37 @@ export const Parceiros = (props: DetalhesVagaProps) => {
         parceiros={parceiros}
       />
       <div className="flex">
-        <SideBar parceiros />
-        <div className="w-[93.3vw] h-[920px] bg-slate-100">
-          <TopBar />
-          {/* <div className="h-[70px] w-[100%] bg-blue-900 justify-end flex items-center">
-            <div className="mr-[55px] text-[25px] text-white">icon usuário</div>
-          </div> */}
+        <SideBar parceiros openMenu={openMenu} />
+        <div className="w-[100%] h-[920px] bg-slate-100">
+          <TopBar setOpenMenu={setOpenMenu} />
           <div className="h-[185px] w-[100%] flex bg-gray-900 text-white">
-            <div className="flex items-center h-[60px] mt-[40px]">
-              <div className="ml-[5vw] md:ml-[95px] text-[12px]">
-                <div className="w-[160px] flex items-center text-center">
-                  <div className="flex justify-center text-[36px] mr-[5px]">
-                    <IoIosBusiness />
-                  </div>
-                  <div className="text-[24px] lg:text-[28px] font-bold">
-                    Parceiros
-                  </div>
+            <div className="flex items-center w-[100%] justify-around h-[60px] mt-[40px]">
+              <div className="w-[160px] flex items-center text-center">
+                <div className="flex justify-center text-[36px] mr-[5px]">
+                  <IoIosBusiness />
+                </div>
+                <div className="text-[24px] lg:text-[28px] font-bold">
+                  Parceiros
                 </div>
               </div>
-              <div className="ml-[3vw] md:ml-[15vw]">
-                <TextField
-                  color="info"
-                  label="Pesquisar"
-                  className="bg-white h-[55px] rounded-2xl font-bold w-[30vw] sm:w-[30vw] lg:w-[25vw]"
-                />
-              </div>
+              <TextField
+                color="info"
+                label="Pesquisar"
+                className="bg-white h-[55px] rounded-2xl font-bold w-[30vw] sm:w-[30vw] lg:w-[25vw]"
+              />
             </div>
           </div>
-          <div className="bg-slate-100 sm:w-[85vw] md:w-[88.9vw] lg:w-[92.3vw] absolute">
-            <div className="w-[80vw] overflow-scroll min-h-[750px] mt-[-62px] sm:ml-[3vw] md:ml-[4vw] lg:ml-[6vw] bg-white border-[3px] rounded-2xl">
-              <div className="flex items-center justify-start ">
-                <div className="w-[1220px] border-b-[2px] h-[60px] flex items-center justify-start">
+          <div className="bg-slate-100 w-[100%] md:w-[calc(100%-90px)] absolute">
+            <div className="w-[100%] md:w-[90%] md:ml-[5%] lg:w-[80%] lg:ml-[10%] overflow-scroll min-h-[750px] mt-[-62px] bg-white border-[3px] rounded-2xl">
+              <div className="w-[100%] min-w-[700px] border-b-[2px] h-[60px] flex items-center justify-between">
+                <div className="flex">
                   {parceiros ? (
-                    <div className="w-[200px] h-[60px] items-center flex justify-center border-b-[2px] border-orange-600">
+                    <div className="min-w-[110px] h-[60px] items-center flex justify-center border-b-[2px] border-orange-600">
                       Parceiros
                     </div>
                   ) : (
                     <div
-                      className="cursor-pointer w-[200px] h-[60px] items-center flex justify-center"
+                      className="cursor-pointer min-w-[110px] h-[60px] items-center flex justify-center"
                       onClick={() => {
                         setParceiros(true);
                         setEmpresasParceiras(false);
@@ -162,12 +155,12 @@ export const Parceiros = (props: DetalhesVagaProps) => {
                     </div>
                   )}
                   {empresasParceiras ? (
-                    <div className="w-[200px] h-[60px] items-center flex justify-center border-b-[2px] border-orange-600">
+                    <div className="min-w-[200px] h-[60px] items-center flex justify-center border-b-[2px] border-orange-600">
                       Empresas parceiras
                     </div>
                   ) : (
                     <div
-                      className="cursor-pointer w-[200px] h-[60px] items-center flex justify-center"
+                      className="cursor-pointer min-w-[200px] h-[60px] items-center flex justify-center"
                       onClick={() => {
                         setParceiros(false);
                         setEmpresasParceiras(true);
@@ -176,52 +169,33 @@ export const Parceiros = (props: DetalhesVagaProps) => {
                       Empresas parceiras
                     </div>
                   )}
-                  {parceiros ? (
-                    <div className="flex justify-end w-[30vw] lg:w-[40vw] xl:w-[50vw]">
-                      <Button
-                        variant="contained"
-                        color="warning"
-                        sx={{
-                          borderRadius: 100,
-                          mr: "40px",
-                          width: "200px",
-                        }}
-                        onClick={openModalParceiro}
-                      >
-                        <div className="normal-case font-bold">
-                          Adicionar parceiro
-                        </div>
-                      </Button>
+                </div>
+                <div>
+                  <Button
+                    variant="contained"
+                    color="warning"
+                    sx={{
+                      borderRadius: 100,
+                      mr: "40px",
+                      width: "200px",
+                    }}
+                    onClick={parceiros ? openModalParceiro : openModalEmpresa}
+                  >
+                    <div className="normal-case font-bold">
+                      {parceiros ? "Adicionar parceiro" : "Adicionar empresa"}
                     </div>
-                  ) : (
-                    <div className="flex justify-end w-[30vw] lg:w-[40vw] xl:w-[50vw]">
-                      <Button
-                        variant="contained"
-                        color="warning"
-                        sx={{
-                          borderRadius: 100,
-                          mr: "40px",
-                          width: "250px",
-                        }}
-                        onClick={openModalEmpresa}
-                      >
-                        <div className="normal-case font-bold">
-                          Adicionar Empresa Parceira
-                        </div>
-                      </Button>
-                    </div>
-                  )}
+                  </Button>
                 </div>
               </div>
               {parceiros && (
                 <div className="pt-[30px] text-[#5B5B5B]">
-                  <div className="w-[800px] lg:w-[1000px] xl:w-[1200px] items-center mb-[30px]">
+                  <div className="w-[100%] items-center mb-[30px]">
                     <div className="text-[18px] pl-[4vw] font-bold">
                       Usuários parceiros
                     </div>
                     <div>
                       <div className="w-[100%] pl-[3vw] justify-center flex text-[12px] h-[40px] border-b-[2px] mt-[30px]">
-                        <div className="w-[200px] text-start font-bold">
+                        <div className="ml-[5%] md:ml-[5%] w-[200px] text-start font-bold">
                           Nome
                         </div>
                         <div className="w-[250px] text-start font-bold">
@@ -239,9 +213,9 @@ export const Parceiros = (props: DetalhesVagaProps) => {
                           <div
                             key={partner?.userUid}
                             // onClick={() => navigate("/growdever/consulta-alunos")}
-                            className="cursor-pointer pl-[3vw] flex w-[800px] lg:w-[1000px] xl:w-[1200px] justify-center items-center h-[60px] text-[12px] border-b-[2px]"
+                            className="cursor-pointer pl-[3vw] flex w-[100%] justify-center items-center h-[60px] text-[12px] border-b-[2px]"
                           >
-                            <div className="w-[200px] text-start">
+                            <div className="ml-[5%] md:ml-[5%] w-[200px] text-start">
                               {partner?.name}
                             </div>
                             <div className="w-[250px] text-start">
@@ -307,7 +281,6 @@ export const Parceiros = (props: DetalhesVagaProps) => {
                 </div>
               )}
             </div>
-
             {listPartners[0] !== undefined && parceiros && (
               <div className="flex justify-center mb-[30px] mt-[20px]">
                 <Pagination

@@ -15,6 +15,9 @@ export const ParceiroHome = () => {
   const [filterOn, setFilterOn] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
+  const [render, setRender] = useState<boolean>(false);
+  const [id, setId] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   // const [totalElements, setTotalElements] = useState<number>(1);
 
   const [vaga, setVaga] = useState<string>("");
@@ -25,9 +28,12 @@ export const ParceiroHome = () => {
   const [edicao, setEdicao] = useState<boolean>(false);
   const [modal, setModal] = useState<boolean>(false);
 
-  const openModal = () => {
+  const openModal = (selectedId?: string) => {
     setModal(true);
+    selectedId && setId(selectedId);
+    selectedId && setEdicao(true);
   };
+
   const closeModal = () => {
     setModal(false);
     setEdicao(false);
@@ -37,20 +43,13 @@ export const ParceiroHome = () => {
     useAppSelector((store) => store.userLogin.entities)
   );
 
-  useEffect(() => {
-    // if (state !== null) {
-    //   const { url } = state;
-    //   setPreviousNavigation(url);
-    // }
-    if (userLogin[0]) {
-      if (userLogin[0].token) {
-        if (userLogin[0].userDTO.roleName !== "PARCEIRO") {
-          navigate("/login");
-        }
-      }
-    } else {
+  if (userLogin[0]) {
+    if (userLogin[0].userDTO.roleName !== "PARCEIRO") {
       navigate("/login");
     }
+  } 
+  
+  useEffect(() => {
     dispatch(
       jobFindByResponsible({
         email: userLogin[0]?.userDTO.email,
@@ -72,7 +71,15 @@ export const ParceiroHome = () => {
 
   return (
     <div>
-      <ModalAddVaga open={modal} handleClose={closeModal} isEdit={edicao} />
+      <ModalAddVaga
+        open={modal}
+        handleClose={closeModal}
+        isEdit={edicao}
+        id={id}
+        render={render}
+        setRender={setRender}
+        setLoading={setLoading}
+      />
       {filterOn ? (
         <div className="flex brightness-50" onClick={() => setFilterOn(false)}>
           <SideBarParceiro filter={filterOn} minhasVagas />
@@ -114,7 +121,7 @@ export const ParceiroHome = () => {
                     variant="contained"
                     color="warning"
                     sx={{ marginRight: "10px", marginBottom: "10px" }}
-                    onClick={openModal}
+                    onClick={() => openModal()}
                   >
                     <div className="normal-case">Adicionar Vaga</div>
                   </Button>
@@ -125,7 +132,7 @@ export const ParceiroHome = () => {
               <div className="flex justify-center">
                 <div className="bg-white w-[85vw] overflow-x-scroll min-h-[680px] rounded-2xl">
                   <div className="min-w-[1170px]">
-                  <div className="flex items-center justify-center w-[100%] pt-[20px] pl-[2.5vw] h-[80px] border-b-[2px]">
+                    <div className="flex items-center justify-center w-[100%] pt-[20px] pl-[2.5vw] h-[80px] border-b-[2px]">
                       <div className="w-[250px]">Vagas</div>
                       <div className="w-[150px]">Situação</div>
                       <div className="w-[150px]">Empresa</div>
@@ -225,7 +232,7 @@ export const ParceiroHome = () => {
                     variant="contained"
                     color="warning"
                     sx={{ marginRight: "10px", marginBottom: "10px" }}
-                    onClick={openModal}
+                    onClick={() => openModal()}
                   >
                     <div className="normal-case">Adicionar Vaga</div>
                   </Button>

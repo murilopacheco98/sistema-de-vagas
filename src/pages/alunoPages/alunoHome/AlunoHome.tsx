@@ -21,7 +21,6 @@ export const AlunoHome = () => {
   const [edicao, setEdicao] = useState<boolean>(false);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
-  const [firstLoad, setFirstLoad] = useState<number>(0);
 
   const userLogin = Object.values(
     useAppSelector((store) => store.userLogin.entities)
@@ -38,7 +37,6 @@ export const AlunoHome = () => {
 
   useEffect(() => {
     setLoading(true);
-    setFirstLoad(firstLoad + 1);
     setPerfil(false);
     if (userLogin[0] !== undefined) {
       const talent = async () => {
@@ -49,14 +47,14 @@ export const AlunoHome = () => {
           })
         );
         if (talentGet.payload.name !== "AxiosError") {
-          setPerfil(true);
-          setLoading(false);
+          setPerfil(true);         
         }
       };
       talent();
+      setLoading(false);
+    } else {
+    setLoading(false);
     }
-    firstLoad === 2 && setLoading(false);
-    !render && setRender(true);
   }, [render]);
 
   const talentBank = Object.values(

@@ -18,7 +18,7 @@ export const jobGetAll = createAsyncThunk(
   "jobs/get/pageable",
   async (input: jobGetAllProps) => {
     const response = await api
-      .get(`/api/jobs/get?page=${input.page}&size=${input.size}`)
+      .get(`/api/jobs/get?page=${input.page}&size=${input.size}&sort=updatedAt,desc`)
       .then((users: AxiosResponse) => {
         return users.data;
       })
@@ -126,9 +126,8 @@ export const jobFilter = createAsyncThunk(
   async (input: jobFilterProps) => {
     const { jobFilter, page, size } = input;
     const response = await api
-      .post(
-        `/api/jobs/filter?title=${jobFilter.title}&companyName=${jobFilter.companyName}&workFormat=${jobFilter.workFormat}&cityName=${jobFilter.cityName}&maxSalary=${jobFilter.maxSalary}&seniority=${jobFilter.seniority}&keywordName=${jobFilter.keywordName}&page=${page}&size=${size}`,
-        input
+      .get(
+        `/api/jobs/filter?title=${jobFilter.title}&workFormat=${jobFilter.workFormat}&stateName=${jobFilter.stateName}&minSalary=${jobFilter.minSalary}&seniority=${jobFilter.seniority}&page=${page}&size=${size}`,
       )
       .then((user: AxiosResponse) => user.data)
       .catch((erro: AxiosResponse) => erro);
@@ -152,6 +151,23 @@ export const jobPost = createAsyncThunk(
     };
     const response = await api
       .post(`/api/jobs/post`, input.jobDTO, config)
+      .then((user: AxiosResponse) => user.data)
+      .catch((erro: AxiosResponse) => erro);
+    return response;
+  }
+);
+
+export const jobUpdate = createAsyncThunk(
+  "job/update",
+  async (input: jobPostProps) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${input.token}`,
+      },
+    };
+    const response = await api
+      .post(`/api/jobs/update`, input.jobDTO, config)
       .then((user: AxiosResponse) => user.data)
       .catch((erro: AxiosResponse) => erro);
     return response;
