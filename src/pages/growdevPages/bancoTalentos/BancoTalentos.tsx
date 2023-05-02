@@ -19,7 +19,7 @@ export const BancoTalentos = () => {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
-  const [totalElements, setTotalElements] = useState<number>(1);
+  // const [totalElements, setTotalElements] = useState<number>(1);
   const [filterOn, setFilterOn] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
   const [render, setRender] = useState<boolean>(false);
@@ -65,7 +65,7 @@ export const BancoTalentos = () => {
       );
       if (response.payload.totalPages) {
         setTotalPages(response.payload.totalPages);
-        setTotalElements(response.payload.totalElements);
+        // setTotalElements(response.payload.totalElements);
       }
     };
     getJobs().catch(console.error);
@@ -84,7 +84,7 @@ export const BancoTalentos = () => {
         );
         if (response.payload.totalPages) {
           setTotalPages(response.payload.totalPages);
-          setTotalElements(response.payload.totalElements);
+          // setTotalElements(response.payload.totalElements);
         }
       };
       getEspecialidades().catch(console.error);

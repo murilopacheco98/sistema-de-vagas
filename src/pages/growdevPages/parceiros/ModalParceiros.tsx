@@ -92,8 +92,8 @@ export const ModalParceiros = ({
       })
     );
     if (userNovo.payload.response) {
-      setError(true);
-      setResponse(userNovo.payload.response.data.message);
+      // setError(true);
+      // setResponse(userNovo.payload.response.data.message);
     } else {
       setError(false);
       setResponse("");
@@ -125,6 +125,14 @@ export const ModalParceiros = ({
           </div>
           {parceiros && (
             <div className="px-[20px] sm:px-[40px] pt-[10px]">
+              {error && (
+                <div className="flex w-[90%] ml-[30px] items-center mb-[30px]">
+                  <div className="flex items-center justify-center w-[50px] h-[50px] rounded-full border-[2px] mr-[15px]">
+                    {response}
+                  </div>
+                  <div className="text-[16px]">Parceiro</div>
+                </div>
+              )}
               <div className="flex w-[90%] ml-[30px] items-center mb-[30px]">
                 <div className="flex items-center justify-center w-[50px] h-[50px] rounded-full border-[2px] mr-[15px]">
                   Foto

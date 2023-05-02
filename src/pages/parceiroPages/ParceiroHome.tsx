@@ -8,6 +8,7 @@ import { jobFindByResponsible } from "../../store/modules/job/JobSlice";
 import { TopBar } from "../../components/topBar/TopBar";
 import { ModalAddVaga } from "../growdevPages/growdeverPrincipal/ModalAddVaga";
 import { TbReportSearch } from "react-icons/tb";
+import { ClipLoader } from "react-spinners";
 
 export const ParceiroHome = () => {
   const navigate = useNavigate();
@@ -18,7 +19,6 @@ export const ParceiroHome = () => {
   const [render, setRender] = useState<boolean>(false);
   const [id, setId] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  // const [totalElements, setTotalElements] = useState<number>(1);
 
   const [vaga, setVaga] = useState<string>("");
   const [empresa, setEmpresa] = useState<string>("");
@@ -47,17 +47,27 @@ export const ParceiroHome = () => {
     if (userLogin[0].userDTO.roleName !== "PARCEIRO") {
       navigate("/login");
     }
-  } 
-  
+  }
+
   useEffect(() => {
-    dispatch(
-      jobFindByResponsible({
-        email: userLogin[0]?.userDTO.email,
-        token: userLogin[0]?.token,
-        page: 0,
-        size: 10,
-      })
-    );
+    setLoading(true);
+    const getJobs = async () => {
+      const findJobs = await dispatch(
+        jobFindByResponsible({
+          email: userLogin[0]?.userDTO.email,
+          token: userLogin[0]?.token,
+          page: 0,
+          size: 10,
+        })
+      );
+      if (findJobs.payload.name === "AxiosError") {
+        setLoading(false);
+      } else {
+        setLoading(false);
+        setTotalPages(findJobs.payload.totalPages)
+      }
+    };
+    getJobs();
   }, []);
 
   const handleChangePage = (
@@ -84,6 +94,11 @@ export const ParceiroHome = () => {
         <div className="flex brightness-50" onClick={() => setFilterOn(false)}>
           <SideBarParceiro filter={filterOn} minhasVagas />
           <div className="w-[93.3vw] bg-[#E5E5E5]">
+            {loading && (
+              <div className="absolute z-10">
+                <ClipLoader color={"#000001"} size={60} />
+              </div>
+            )}
             <TopBar />
             <div className="h-[140px] w-[100%] justify-around bg-gray-900 text-white flex items-center">
               <div className="md:flex items-center">

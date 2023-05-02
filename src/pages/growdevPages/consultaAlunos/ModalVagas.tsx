@@ -24,7 +24,7 @@ export const ModalVagas = ({
   // const [id, setId] = useState<number>(0);
   // const [error, setError] = useState<string>("");
   const [modalTwo, setModalTwo] = useState<boolean>(false);
-  const [edition, setEdition] = useState<boolean>();
+  // const [edition, setEdition] = useState<boolean>();
   // const dispatch = useAppDispatch();
 
   // const openModal = () => {
@@ -34,7 +34,7 @@ export const ModalVagas = ({
   const closeModal = () => {
     setModalTwo(false);
     handleClose && handleClose();
-    setEdition(false);
+    // setEdition(false);
   };
 
   // const handleAddEvent = async () => {

@@ -22,7 +22,6 @@ export const Parceiros = (props: DetalhesVagaProps) => {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
-  const [totalElements, setTotalElements] = useState<number>(1);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [currentPage2, setCurrentPage2] = useState<number>(1);
   const [totalPages2, setTotalPages2] = useState<number>(1);
@@ -63,7 +62,7 @@ export const Parceiros = (props: DetalhesVagaProps) => {
       );
       if (response.payload.totalPages) {
         setTotalPages(response.payload.totalPages);
-        setTotalElements(response.payload.totalElements);
+        // setTotalElements(response.payload.totalElements);
       }
     };
     getPartners().catch(console.error);
@@ -78,8 +77,7 @@ export const Parceiros = (props: DetalhesVagaProps) => {
         })
       );
       if (response.payload.totalPages2) {
-        setTotalPages(response.payload.totalPages2);
-        setTotalElements(response.payload.totalElements2);
+        setTotalPages2(response.payload.totalPages2);
       }
     };
     getCompanys().catch(console.error);

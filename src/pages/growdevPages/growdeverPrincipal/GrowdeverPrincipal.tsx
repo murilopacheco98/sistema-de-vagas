@@ -26,7 +26,7 @@ export const GrowdeverPrincipal = () => {
   const [filterOn, setFilterOn] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
-  const [totalElements, setTotalElements] = useState<number>(1);
+  // const [totalElements, setTotalElements] = useState<number>(1);
   const [inputValue, setInputValue] = useState<string>("");
   const [render, setRender] = useState<boolean>(false);
   const [modal, setModal] = useState<boolean>(false);
@@ -122,7 +122,7 @@ export const GrowdeverPrincipal = () => {
         );
         if (response.payload.totalPages) {
           setTotalPages(response.payload.totalPages);
-          setTotalElements(response.payload.totalElements);
+          // setTotalElements(response.payload.totalElements);
         }
       };
       getEspecialidades().catch(console.error);

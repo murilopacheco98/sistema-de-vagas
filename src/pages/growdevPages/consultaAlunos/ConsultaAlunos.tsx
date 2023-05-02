@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { SideBar } from "../../../components/sidebar/SideBar";
 import { SideBarParceiro } from "../../../components/sidebar/SideBarParceiro";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { useAppSelector } from "../../../store/hooks";
 import { selectById } from "../../../store/modules/talentBank/TalentBankSlice";
 import { ModalVagas } from "./ModalVagas";
 
@@ -23,7 +23,7 @@ export const ConsultaAlunos = (props: ConsultaAlunosProps) => {
   const [edicao, setEdicao] = useState<boolean>(false);
 
   const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
+  // const [email, setEmail] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [city, setCity] = useState<string>("");
   const [seniority, setSeniority] = useState<string>("");
@@ -52,7 +52,7 @@ export const ConsultaAlunos = (props: ConsultaAlunosProps) => {
   useEffect(() => {
     if (talentBankByUid) {
       setName(talentBankByUid?.name);
-      setEmail(talentBankByUid?.email);
+      // setEmail(talentBankByUid?.email);
       setPhoneNumber(talentBankByUid?.phoneNumber);
       setCity(talentBankByUid?.addressDTO.cityName);
       setSeniority(talentBankByUid?.curriculumDTO.seniority);

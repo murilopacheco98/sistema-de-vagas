@@ -41,9 +41,7 @@ export const ModalCadastrar = ({
   // const [id, setId] = useState<number>(0);
   const [error, setError] = useState<boolean>(false);
   const [response, setResponse] = useState<string>("");
-  // const [edition, setEdition] = useState<boolean>();
   const dispatch = useAppDispatch();
-  // const [edicao, setEdicao] = useState<boolean>(false);
 
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -118,8 +116,8 @@ export const ModalCadastrar = ({
       setResponse(talentBank.payload.response.message);
     } else {
       if (handleClose) {
-        // setRender(!render);
-        // handleClose();
+        setRender(!render);
+        handleClose();
       }
     }
   };
@@ -176,6 +174,11 @@ export const ModalCadastrar = ({
               </div>
             </div>
           </div>
+          {error && (
+            <div className="h-[40px] w-[100%] ml-[5%] flex items-center">
+              <div className="text-[14px] text-[#e81919]">{response}</div>
+            </div>
+          )}
           {dadosAluno && (
             <form onSubmit={handleSubmit}>
               <div className="w-[100%] pl-[30px] lg:pl-[40px] pt-[30px]">
