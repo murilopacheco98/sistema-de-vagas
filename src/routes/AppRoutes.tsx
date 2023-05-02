@@ -1,13 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import React, { useEffect } from "react";
 import {
   BrowserRouter,
   Outlet,
   Route,
-  RouteObject,
-  RouteProps,
-  RouterProviderProps,
   Routes,
   useNavigate,
 } from "react-router-dom";
@@ -67,7 +64,7 @@ export const AppRoutes = () => {
             path="/vagas-inscritas/informacoes-da-vaga"
             element={<DetalhesVaga />}
           />
-          
+
           <Route element={<ProtectedAdmin />}>
             <Route path="/growdever" element={<GrowdeverPrincipal />} />
             <Route
@@ -106,7 +103,6 @@ export const AppRoutes = () => {
             path="/empresa-parceira/vagas-abertas/informacoes-da-vaga/:uid"
             element={<DetalhesVaga parceiro />}
           />
-
         </Routes>
       </BrowserRouter>
     </>
