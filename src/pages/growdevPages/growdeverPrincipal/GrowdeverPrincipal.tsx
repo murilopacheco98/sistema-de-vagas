@@ -177,7 +177,7 @@ export const GrowdeverPrincipal = () => {
         }}
       >
         <SideBar filter={filterOn} vagasAbertas openMenu={openMenu} />
-        <div className="w-[100%] md:w-[calc(100%-90px)] bg-[#E5E5E5]">
+        <div className="w-[100%] md:w-[calc(100%-90px)] min-h-[720px] bg-[#E5E5E5]">
           <TopBar setOpenMenu={setOpenMenu} />
           <div className="h-[100px] w-[100%] justify-around bg-gray-900 text-white flex items-center">
             <div className="flex items-center">
